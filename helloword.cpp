@@ -1,6 +1,9 @@
 #include<iostream>
 
-int main()
+int GetSize(int data[])
 {
-    printf("Hello world!");
+    return sizeof(data);
+}
+
+int _tmain(int argc, _TCHAR* argv[]);
 }
