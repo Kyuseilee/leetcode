@@ -7,7 +7,13 @@
 # @lc code=start
 class Solution:
     def getNoZeroIntegers(self, n: int) -> List[int]:
-        s = list(str)
+        for i in range(1, n):
+            b = str(n-i)
+            si = str(i)
+            if '0' in b or '0' in si:
+                continue
+            return [i, int(b)]
+
         
 # @lc code=end
 
