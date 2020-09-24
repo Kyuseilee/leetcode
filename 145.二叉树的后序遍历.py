@@ -17,6 +17,23 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
+        if not root: return []
+        stack = []
+        p = root 
+        res = []
+        flag = []
+        while p or stack:
+            while p:
+                flag.append(0)
+                stack.append(p)
+                p = p.left
+            while stack and flag[-1] == 1:
+                flag.pop()
+                res.append(stack.pop().val)
+            if stack:
+                flag[-1] = 1
+                p = stack[-1].right
+        return res
         
 # @lc code=end
 
