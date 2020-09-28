@@ -19,16 +19,12 @@ class Solution(object):
         :type sum: int
         :rtype: bool
         """
-        if not root: return False
-        stack = [(root.val, root)]
-        while stack:
-            sum_, node = stack.pop(0)
-            if node.right:
-                stack.append((sum_ + node.right.val, node.right))
-            if node.left:
-                stack.append((sum_ + node.left.val, node.left))
-            if not node.left and not node.right and sum_ == sum:
-                return True
-        return False
+        if not root:
+            return False
+        if not root.left and not root.right:
+            return sum == root.val
+        return self.hasPathSum(root.left, sum-root.val) or self.hasPathSum(root.right, sum-root.val)
+
+        
 # @lc code=end
 

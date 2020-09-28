@@ -12,18 +12,18 @@
 #         self.left = None
 #         self.right = None
 
-class Solution:
+class Solution(object):
     def sortedArrayToBST(self, nums):
-        # 将中序遍历反解,每次构造新的的左右子树
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
         if not nums:
             return None
-        mid = len(nums)//2
-        node = TreeNode(nums[mid])
-        left = nums[:mid]
-        right = nums[mid+1:]
-        node.left = self.sortedArrayToBST(left)
-        node.right = self.sortedArrayToBST(right)
-        return node
-
+        mid = (len(nums) - 1) // 2
+        root = TreeNode(nums[mid])
+        root.left = self.sortedArrayToBST(nums[:mid])
+        root.right = self.sortedArrayToBST(nums[mid+1:])
+        return root
 # @lc code=end
 

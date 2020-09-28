@@ -18,15 +18,12 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        return self.recur(root) != -1
-    
-    def recur(self, root):
-        if not root: return 0
-        left = self.recur(root.left)
-        if left == -1: return -1
-        right = self.recur(root.right)
-        if right == -1: return -1
-        return max(left,right) + 1 if abs(left - right) < 2 else -1
-
+        def height(root):
+            if not root:
+                return 0
+            return max(height(root.left), height(root.right)) + 1
+        if not root:
+            return True
+        return abs(height(root.left) - height(root.right)) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
 # @lc code=end
 

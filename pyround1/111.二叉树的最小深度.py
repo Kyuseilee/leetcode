@@ -18,15 +18,17 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        if not root: return 0
+        if not root:
+            return 0
         queue = [(1, root)]
         while queue:
             depth, node = queue.pop(0)
             if not node.left and not node.right:
                 return depth
             if node.left:
-                queue.append((depth+ 1, node.left))
+                queue.append((depth+1, node.left))
             if node.right:
-                queue.append((depth+ 1, node.right))
+                queue.append((depth+1, node.right))
+        
 # @lc code=end
 

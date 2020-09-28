@@ -2,5 +2,6 @@
     "cSpell.ignoreWords": [
         "vector"
     ],
+    "python.pythonPath": "D:\\Program\\Anaconda\\python.exe",
     
 }
