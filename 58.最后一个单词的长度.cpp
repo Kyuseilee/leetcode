@@ -8,15 +8,19 @@
 class Solution {
 public:
     int lengthOfLastWord(string s) {
-        if(s.empty()) return 0;
-        int size = s.size() -1;
-        while(size >= 0 and s[size] == ' '){
-            s.erase(size);
-            --size;
+        if(!s.size()) return 0;
+        int n = s.size()-1;
+        int flag = 1;
+        int count = 0;
+        for(int i = n; i >= 0; i--){
+            if(flag and s[i] != ' ')
+                flag = 0;
+            if(s[i] == ' ' and not flag)
+                break;
+            if(s[i] != ' ')
+                count++;
         }
-        int pos = s.find_last_of(' ');
-        return s.length() - pos - 1;
-        
+        return count;
     }
 };
 // @lc code=end
