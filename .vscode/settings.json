@@ -3,5 +3,6 @@
         "vector"
     ],
     "python.pythonPath": "D:\\Program\\Anaconda\\python.exe",
+    "cmake.cmakePath": "D:\\Program\\CMake\\bin\\cmake",
     
 }
