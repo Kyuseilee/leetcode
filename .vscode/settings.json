@@ -4,5 +4,10 @@
     ],
     "python.pythonPath": "D:\\Program\\Anaconda\\python.exe",
     "cmake.cmakePath": "D:\\Program\\CMake\\bin\\cmake",
+    "files.associations": {
+        "*.ts": "typescript",
+        "*.rmd": "markdown",
+        "vector": "cpp"
+    },
     
 }
