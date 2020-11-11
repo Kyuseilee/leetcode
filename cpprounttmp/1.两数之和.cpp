@@ -8,15 +8,19 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int>map;
-        for(int i = 0; i < nums.size(); i++){
-            auto iter = map.find(target-nums[i]);
-            if (iter != map.end()){
-                return {iter->second, i};
+        map<int, int> a;
+        vector<int> b(2, -1);
+        for(int i = 0; i < nums.size(); i++)
+        {
+            if(a.count(target-nums[i]) > 0)
+            {
+            b[0] = a[target - nums[i]];
+            b[1] = i;
+            break;
             }
-            map.emplace(nums[i], i);
+        a[nums[i]] = i;
         }
-        return {};
+    return b;
     }
 };
 // @lc code=end
