@@ -7,7 +7,11 @@
     "files.associations": {
         "*.ts": "typescript",
         "*.rmd": "markdown",
-        "vector": "cpp"
+        "vector": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "string_view": "cpp",
+        "limits": "cpp"
     },
     
 }
