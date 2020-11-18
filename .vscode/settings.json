@@ -11,7 +11,8 @@
         "array": "cpp",
         "deque": "cpp",
         "string_view": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "algorithm": "cpp"
     },
     
 }
