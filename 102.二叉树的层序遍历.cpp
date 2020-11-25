@@ -29,7 +29,9 @@ public:
                 que.pop();
                 if(!node) continue;
                 stk.push_back(node->val);
+                if(node->left)
                 que.push(node->left);
+                if(node->right)
                 que.push(node->right);
             }
             if(!stk.empty())//判断非空加入，防止最后冗余
