@@ -12,7 +12,9 @@
         "deque": "cpp",
         "string_view": "cpp",
         "limits": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "*.tcc": "cpp",
+        "string": "cpp"
     },
     
 }
