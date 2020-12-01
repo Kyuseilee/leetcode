@@ -16,32 +16,28 @@
  */
 class BSTIterator {
 public:
+    stack<TreeNode*> res;
     BSTIterator(TreeNode* root) {
-        helper(root, root->left);
-        helper(root->right, root);
-
-
+        helper(root);
     }
-    void helper(TreeNode* root, TreeNode* former){
-        if(!root)
-            return ;
-        former->next = root;
-        former = root;
-        if(root->left)
-        helper(root->left, former);
-        if(root->right)
-        helper(root->right, former);
-        
+    void helper(TreeNode* root){
+        while(root){
+            res.emplace(root);
+            root = root->left;
+        }
     }
-    
     /** @return the next smallest number */
-    int next(TreeNode* root) {
-        return Node->next;
+    int next() {
+        TreeNode* root =res.top();
+        res.pop();
+        helper(root->left);
+        return root->val;
     }
+        
     
     /** @return whether we have a next smallest number */
-    bool hasNext(TreeNode* Node) {
-        return Node->next != nullptr;
+    bool hasNext() {
+        return !res.empty();
 
     }
 };

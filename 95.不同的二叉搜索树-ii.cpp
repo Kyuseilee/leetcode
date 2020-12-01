@@ -19,7 +19,30 @@
 class Solution {
 public:
     vector<TreeNode*> generateTrees(int n) {
-        
+        if(!n)
+            return {};
+        return helper(1, n);
+    }
+    vector<TreeNode*> helper(int start, int end){
+        {
+            if(start > end)
+                return {nullptr};
+            vector<TreeNode*> alltree;
+            for(int i = start; i <= end; i++){
+                vector<TreeNode*> leftTrees = helper(start, i-1);
+                vector<TreeNode*> rightTrees = helper(i+1, end);
+                for(auto&left : leftTrees)
+                {
+                    for(auto& right : rightTrees){
+                        TreeNode* root = new TreeNode(i);
+                        root->left = left;
+                        root->right = right;
+                        alltree.push_back(root);
+                    }
+                }
+            }
+        return alltree;
+        }
     }
 };
 // @lc code=end
