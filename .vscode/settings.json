@@ -14,7 +14,9 @@
         "limits": "cpp",
         "algorithm": "cpp",
         "*.tcc": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp"
     },
     
 }
