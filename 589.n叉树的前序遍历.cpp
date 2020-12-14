@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=559 lang=cpp
+ * @lc app=leetcode.cn id=589 lang=cpp
  *
- * [559] N叉树的最大深度
+ * [589] N叉树的前序遍历
  */
 
 // @lc code=start
@@ -27,9 +27,7 @@ public:
 
 class Solution {
 public:
-    int maxDepth(Node* root) {
-        int left = 0;
-        int right = 
+    vector<int> preorder(Node* root) {
         
     }
 };
