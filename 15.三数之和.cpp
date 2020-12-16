@@ -8,33 +8,36 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
         vector<vector<int>>res;
-        vector<int> tmp;
         if(nums.size() < 3)
             return {};
-        sort(nums.begin(), nums.end());
-        for(int i = 0; i < nums.size()-2; i++){
-            if(nums[i] > 0)
+        for(int start = 0; start < nums.size(); start++){
+            if(nums[start] > 0)
                 return res;
-            if(i != 0 and nums[i] == nums[i-1])
+            
+            if(start > 0 and nums[start] == nums[start-1])
                 continue;
-            tmp.push_back(nums[i]);
-            for(int j = i+1; j < nums.size()-1; j++){
-                tmp.push_back(nums[j]);
-                for(int k = j+1; k <nums.size(); k++)
-                {
-                    if(nums[i] + nums[j] + nums[k] == 0)
-                    {
-                        tmp.push_back(nums[k]);
-                        res.push_back(tmp);
-                        tmp.pop_back();
-                    }
+            
+            int left = start +1;
+            int right = nums.size() -1;
+            while(left < right){
+                if(nums[start] + nums[left] + nums[right] > 0)
+                    right--;
+                else if(nums[start] + nums[right] + nums[left] < 0) 
+                    left++;
+                else{
+                    res.push_back({nums[start], nums[left], nums[right]});
+                while(right > left and nums[right] == nums[right-1]) right--;
+                while(right > left and nums[left] == nums[left+1]) left++;
+                right--;
+                left++;
                 }
-                tmp.pop_back();
             }
-            tmp.pop_back();
         }
         return res;
+
+
     }
 };
 // @lc code=end

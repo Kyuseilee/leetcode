@@ -8,28 +8,25 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        string res = "";
-        int count = 0;
-            int i = 0;
-        string::size_type idx;
-        while(i < s.size()){
-            idx = res.find(s[i]);
-            cout << idx<<"\n";
-            if(idx == string::npos){
-                res += s[i];
-                cout << res <<"\n";
+        string tmp = "";
+        int max_length = 0;
+        for(int i = 0; i < s.size(); i++){
+            tmp += s[i];
+            for(int j = i+1; j< s.size(); j++){
+                if(tmp.find(s[j]) == tmp.npos){
+                    tmp += s[j];
+                }
+                else{
+                    break;
+                }
             }
-            else
-            {
-                int length = res.size();
-                count = max(count, length);
-                res = s[i];
-            }
-            i++;
+            int n = tmp.size();
+            max_length = max(max_length, n);
+            tmp = "";
+            if(s.size() - i < max_length)
+                break;
         }
-        
-        return count  < res.size()? res.size() : count;
-
+        return max_length;
     }
 };
 // @lc code=end

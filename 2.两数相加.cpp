@@ -17,32 +17,46 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode* head = new ListNode(-1);
-        ListNode* p = l1;
-        LiseNode* q = l2;
-        int length1, length2;
-        while(p){
-            length1++;
-            p = p->next;
+        ListNode* node = head;
+
+        int carry = 0;
+        while(l1 and l2){
+            head->next = new ListNode((l1->val + l2->val + carry) % 10);
+            if(l1->val + l2->val+carry > 9)
+                carry = 1;
+            else carry = 0;
+            l1 = l1->next;
+            l2 = l2->next;
+            head = head->next;
         }
-        while(q){
-            length2++;
-            q = q->next;
-        }
-        if(length1 > length2){
-            for(int i = 0; i < length1 - length2; i++){
-                q->next = new ListNode(0);
-                q = q->next;
+        while(l1)
+        {
+            head->next= new ListNode((l1->val+carry) %10);
+            if(l1->val + carry> 9)
+                carry = 1;
+            else
+            {
+                carry = 0;
             }
+            head = head->next;
+            l1 = l1->next;
         }
-        else{
-            for(int i = 0l i < length2 - length1; i++){
-                p->next = new ListNode(0);
-                p = p->next;
+        while(l2)
+        {
+            head->next= new ListNode((l2->val+carry) %10);
+            if(l2->val + carry> 9)
+                carry = 1;
+            else
+            {
+                carry = 0;
             }
+            head = head->next;
+            l2 = l2->next;
         }
-        p = l1;
-        q = l2;
-        
+        if(carry)
+            head->next = new ListNode(1);
+
+        return node->next;
     }
 };
 // @lc code=end
