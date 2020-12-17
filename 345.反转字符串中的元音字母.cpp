@@ -23,6 +23,8 @@ public:
                 j--;
             }
             swap(s[i], s[j]);
+            i++;
+            j--;
         }
         return s;
 
