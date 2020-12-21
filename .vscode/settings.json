@@ -17,7 +17,8 @@
         "string": "cpp",
         "initializer_list": "cpp",
         "utility": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "sstream": "cpp"
     },
     
 }
