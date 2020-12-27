@@ -7,24 +7,28 @@
 // @lc code=start
 class Solution {
 public:
+    vector<vector<int>> res;
+    vector<int> tmp;
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        int min_val = candidates[0];
-        vector<vetor<int>> res;
-        vector<int> tmp;
-        for(int i = candidates.size(); i >= 0; i--){
-            if(target - candidates[i] == 0){
-                tmp.push_back(candidates[i]);
-                res.push_back(tmp);
-                tmp.clear();
-            }
-            else if(target - candidates[i] < min_val){
-                tmp.clear();
-            }
-            else{
-                tmp.push_back(candidates[i]);
-            }
+        res.clear();
+        tmp.clear();
+        backtracking(candidates, target, 0, 0);
+        return res;
+    }
+    void backtracking(vector<int>& candidates, int target, int index, int sum){
+        if(sum == target){
+            res.push_back(tmp);
+            sum = 0;
+            return;
         }
-
+        while(index < candidates.size() and sum < target){
+            sum += candidates[index];
+            tmp.push_back(candidates[index]);
+            backtracking(candidates, target, index, sum);
+            sum -= candidates[index];
+            tmp.pop_back();
+            index++;
+        }
     }
 };
 // @lc code=end
