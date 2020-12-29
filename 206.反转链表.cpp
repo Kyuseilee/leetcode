@@ -24,9 +24,7 @@ public:
             cur->next = node;
             node = cur;
             cur = tmp;
-
         }
-
         return node;
     }
 };

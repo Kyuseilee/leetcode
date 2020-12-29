@@ -12,23 +12,38 @@ public:
         if(nums.size() == 1)
             return 1;
         int count = 1;
-        int k = 0;
-        for(int i = 1; i < nums.size(); i++){
-            if(nums[i] == nums[k])
+        int pos = nums.size();
+        int i = 1;
+        while(i < nums.size()){
+            if(i+1 < nums.size() and nums[i] > nums[i+1])
+                break;
+            if(nums[i] == nums[i-1])
             {
-                if(count < 2)
-                {
-                    nums[++k] = nums[i];
-                    count++;
-                }
+                count++;
             }
-            else
-            {
-                nums[++k] = nums[i];
+            else{
                 count = 1;
             }
+            if(count > 2){
+                int cur = i+1;
+                while(nums[cur] == nums[i])
+                    cur++;
+                for(int j = cur; j < pos-1; j++){
+                    swap(nums[cur], nums[cur+1]);
+                    cur++;
+                }
+                pos--;
+                if(pos < i)
+                {
+                    pos = i;
+                    break;
+                }
+            }
+            else{
+                i++;
+            }
         }
-        return k+1;
+        return pos;
     }
 };
 // @lc code=end

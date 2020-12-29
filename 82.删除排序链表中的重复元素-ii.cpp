@@ -21,18 +21,29 @@ public:
 
         ListNode* res = new ListNode(-1);
         res->next = head;
+        ListNode* pre = res;
 
         ListNode* fast = head->next;
         ListNode* slow = head;
-        ListNode* pre = res;
 
         while(fast and slow){
-            while(fast->val == slow->val){
+            if(fast->val == slow->val){
+                while(fast and fast->val == slow->val){
+                    fast = fast->next;
+                }
+                pre->next = fast;
+                slow = fast;
+                if(!fast)
+                    break;
                 fast = fast->next;
             }
-            pre->next = fast;
-            slow = fast;
-            fast = fast->next;
+            else{
+                pre = pre->next;
+                slow = slow->next;
+                if(!slow)
+                    break;
+                fast = fast->next;
+            }
         }
         return res->next;
         

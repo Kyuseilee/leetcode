@@ -8,23 +8,35 @@
 class Solution {
 public:
     bool containsPattern(vector<int>& arr, int m, int k) {
-        if(m*k > arr.size())
-            return false;
-        string s = "";
-        for(auto num:arr){
-            s += to_string(num);
-        }
-        for(int i = 0; i < arr.size() - k; i++){
-            string tmp = "";
-            strncpy(tmp, s+i, k);
-            int count = 1;
-            while(tmp.size() < arr.size()){
-                if(compare(i, ))
+        vector<int>com;
+        int count = 0;
+        for(int i = 0; i < arr.size(); i++){
+            if(com.size() < m){
+                com.push_back(arr[i]);
             }
-
+            else{
+                count = 1;
+                vector<int> tmp;
+                for(int j = i+1; j < arr.size(); j++){
+                    if(count >= k)
+                        return true;
+                    if(tmp.size() == com.size())
+                    {
+                        count++;
+                        tmp.clear();
+                    }
+                    if(arr[j] == com[j-i-1])
+                    {
+                        tmp.push_back(arr[j]);
+                    }
+                    else{
+                        break;
+                    }
+                }
+                com.clear();
+            }
         }
-        
-
+        return false;
     }
 };
 // @lc code=end
