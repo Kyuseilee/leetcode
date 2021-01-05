@@ -8,32 +8,27 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        if(nums.size() < 2)
-            return ;
-        int slow = 0;
-        bool flag = false;
-        for(int i = 0; i <nums.size(); i++){
-            if(i+1 < nums.size()){
-                if(nums[i] < nums[i+1]){
-                    slow = i;
-                    flag = true;
-                }
-            }
+        int size = nums.size();
+        int i = size-2;
+        int j;
+        while(i >= 0 and nums[i] >= nums[i+1]){
+            i--;
         }
-        if(!flag)
+        if(i < 0)
+        {
             sort(nums.begin(), nums.end());
-        else{
-            int cur = slow;
-            swap(nums[slow], nums[slow+1]);
-            for(int i = cur+1; i < nums.size(); i++){
-                if(i +1 < nums.size()){
-                    if(nums[i] > nums[i+1])
-                        swap(nums[i], nums[i+1]);
-                }
+            return ;
+        }
+        for(int j = size-1; j > i; j--)
+        {
+            if(nums[j] > nums[i])
+            {
+                swap(nums[j], nums[i]);
+                sort(nums.begin() + i+1, nums.end());
+                break;
             }
         }
         return ;
-        
     }
 };
 // @lc code=end

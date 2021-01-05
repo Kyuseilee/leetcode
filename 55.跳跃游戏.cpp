@@ -8,16 +8,16 @@
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        if(nums.size() == 1)
-            return true;
-        int right = 0;
-        for(int i = 0; i < nums.size()-1; i++){
-            if(i <= right){
-                
+        int n = nums.size();
+        int rightmost = 0;
+        for(int i = 0; i < n; i++){
+            if(i <= rightmost){
+                rightmost = max(rightmost, i + nums[i]);
+                if(rightmost >= n-1)
+                    return true;
             }
         }
         return false;
-
     }
 };
 // @lc code=end
