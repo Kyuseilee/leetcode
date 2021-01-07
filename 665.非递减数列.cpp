@@ -8,17 +8,17 @@
 class Solution {
 public:
     bool checkPossibility(vector<int>& nums) {
-        int cur_flag = nums[0];
+        if(nums.size() < 2)
+            return true;
         bool flag = false;
+        int max_val = nums[0];
         for(int i = 1; i < nums.size(); i++){
-            if(nums[i] < cur_flag)
-            {
+            if(nums[i] < max_val){
                 if(flag)
                     return false;
                 flag = true;
             }
-                cur_flag = nums[i];
-            
+            max_val = nums[i];
         }
         return true;
 

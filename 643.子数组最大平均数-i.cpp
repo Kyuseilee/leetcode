@@ -8,35 +8,24 @@
 class Solution {
 public:
     double findMaxAverage(vector<int>& nums, int k) {
-        if(nums.size() < k)
-            return -1;
-        double max_val = 0;
-        double cur_val = 0;
-        if(k == 1)
-        {
-            sort(nums.begin(), nums.end());
-            return nums[nums.size() -1];
-        }
-        else if(k == 2){
-            for(int i = 0; i < nums.size() - 1; i++){
-                cur_val = nums[i] + nums[i+1];
-                max_val = max(max_val, cur_val);
-            }
-            max_val /= k;
-        }
-        else 
-        {
-            for(int i = 0; i < k; i++)
-                cur_val += nums[i];
-            for(int i = 1; i < nums.size() - k+1; i++){
-                max_val = max(cur_val, max_val);
-                cur_val = cur_val - nums[i-1] + nums[i+k-1];
-            }
-            max_val = max(cur_val, max_val);
-            max_val /= k;
-        }
-        return max_val;
+        double sum = 0;
+        int pos = 0;
+        double max_sum = INT_MIN;
 
+        while(pos < k)
+        {
+            sum += nums[pos];
+            pos++;
+        }
+        int former = nums[0];
+        for(int i = pos; i < nums.size(); i++)
+        {
+            max_sum = max(sum, max_sum);
+            sum -= former;
+            sum += nums[i];
+            former = nums[++pos-k];
+        }
+        return max(max_sum, sum) / k;
     }
 };
 // @lc code=end
