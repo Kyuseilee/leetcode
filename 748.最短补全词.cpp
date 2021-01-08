@@ -8,15 +8,40 @@
 class Solution {
 public:
     string shortestCompletingWord(string licensePlate, vector<string>& words) {
-        unordered_map<char, int> com;
+        string real_need = "";
         for(auto ch : licensePlate){
-            com[tolower(ch)] += 1;
+            if(tolower(ch) >= 'a' and tolower(ch) <= 'z')
+                real_need += tolower(ch);
         }
-        for(int i = 0; i < words.size(); i++){
-            
+        unordered_map<char, int>com;
+        for(auto ch : real_need){
+            com[ch] += 1;
         }
-        
-
+        string res = "";
+        int min_length = INT_MAX;
+        for(auto word : words){
+            bool flag = false;
+            unordered_map<char, int> tmp;
+            for(auto ch : word){
+                tmp[ch] += 1;
+            }
+            for(auto ch : real_need){
+                if(!tmp[ch] or tmp[ch] < com[ch])
+                {
+                    flag = true;
+                    break;
+                }
+            }
+            if(!flag)
+            {
+                if(word.size() < min_length)
+                {
+                    res = word;
+                    min_length = word.size();
+                }
+            }
+        }
+        return res;
     }
 };
 // @lc code=end
