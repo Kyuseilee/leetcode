@@ -12,13 +12,23 @@ public:
     vector<string> generateParenthesis(int n) {
         res.clear();
         s = "(";
-        backtracking();
+        backtracking(s,1, 1, 2*n);
         return res;
     }
-    void backtracking(int n){
-        if(s.size() == n*2){
+    void backtracking(string s, int left,int right, int goal){
+        if(s.size() == goal){
             res.push_back(s);
             return ;
+        }
+        if(count(s.begin(), s.end(), '(') < goal / 2){
+            s += "(";
+            right++;
+            backtracking(s,left, right,goal);
+        }
+        if(right){
+            s += ")";
+            right--;
+            backtracking(s,left,right,goal);
         }
     }
 };

@@ -8,23 +8,40 @@
 class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+        int start = nums.size()-1;
+        int sum = 1;
         int count = 0;
-        for(int i = 0; i < nums.size(); i++){
-            if(nums[i] >= k)
-                continue;
-            int start = i+1;
-            int total = nums[i];
-            count++;
-            while(start < nums.size() and total*nums[start] <k)
+        while(start >= 0){
+            if(nums[start] < k)
             {
-                total *= nums[start];
-                start++;
-                count++;
+                sum = nums[start];
+                count += 1;
             }
-            cout << i << " " << count<<"\n";
+            else{
+                start--;
+                continue;
+            }
+            int pos = start-1;
+            while(pos >= 0){
+                while(pos >= 0 and nums[pos] == 1)
+                {
+                    count++;
+                    pos--;
+                    continue;
+                }
+                if(pos >= 0 and sum*nums[pos] < k)
+                {
+                    sum *= nums[pos];
+                    count++;
+                    pos--;
+                }
+                else{
+                    break;
+                }
+            }
+            start--;
         }
         return count;
-
     }
 };
 // @lc code=end

@@ -8,28 +8,31 @@
 class Solution {
 public:
     bool buddyStrings(string A, string B) {
-        if(A.size() != B.size()){
+        if(A.size() != B.size() or A.empty())
+            return false;
+        bool flag = false;
+        int pos = 0;
+        unordered_map<char, int>com;
+        if(A == B){
+            for(auto ch : A)
+                com[ch] += 1;
+            for(auto item : com)
+                if(item.second > 1)
+                    return true;
             return false;
         }
-        int slow = 0, fast = 0;
-        while(fast < A.size())
-        {
-            while(A[fast] == B[fast])
-                fast++;
-            if(fast >= A.size()){
-                swap(A[slow], A[fast-1]);
-                return A == B;
+        for(int i = 0; i < A.size(); i++){
+            if(A[i] != B[i]){
+                if(flag)
+                {
+                    swap(A[i], A[pos]);
+                    return A == B;
+                }
+                flag = true;
+                pos = i;
             }
-            slow = fast;
-            fast++;
-            while(A[fast] == B[fast])
-                fast++;
-            swap(A[slow], A[fast]);
-            if(A == B)
-                return true;
         }
-        return A == B;
-
+        return false;
     }
 };
 // @lc code=end
