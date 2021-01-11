@@ -8,13 +8,14 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        string res = "";
-        for(int i = 0; i < s.size(); i++){
-            res = s[i] ^ t[i];
+        int start = 0;
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        while(start < s.size() and s[start] == t[start])
+        {
+            start++;
         }
-        return char(res);
-
-
+        return t[start];
     }
 };
 // @lc code=end

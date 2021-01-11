@@ -8,28 +8,51 @@
 class Solution {
 public:
     int findLUSlength(string a, string b) {
-        int lefta = 0, leftb = 0, righta= a.size(), rightb = b.size();
-        int count = 0;
-        while(lefta <= righta and leftb <= rightb){
-            while(lefta <= righta and leftb <= rightb and a[lefta] == b[leftb])
-            {
-                lefta++;
-                leftb++;
+        if(a == b)
+            return -1;
+        unordered_map<string, bool>used;
+        int max_length = 0;
+        string s = "";
+        for(int i = 0; i < a.size(); i++){
+            s = a[i];
+            for(int j = 0; j < a.size(); i++){
+                s += a[j];
+                if(used[s])
+                    break;
+                else{
+                    if(find(s.begin(), s.end(), b) != b.end())
+                    {
+                        int size = s.size();
+                        max_length = max(max_length, size);
+                        used[s] = true;
+                    }
+                    else{
+                        break;
+                    }
+                }
             }
-            while(lefta <= righta and leftb <= rightb and a[righta] == b[rightb])
-            {
-                rightb--;
-                righta--;
-            }
-            if(lefta > righta or leftb > rightb)
-                break;
-            count++;
-            lefta++;
-            leftb++;
         }
-        if(count)
-            return count;
-        return -1;
+        for(int i = 0; i < b.size(); i++){
+            s = b[i];
+            for(int j = 0; j < b.size(); i++){
+                s += b[j];
+                if(used[s])
+                    break;
+                else{
+                    if(find(s.begin(), s.end(), a) != a.end())
+                    {
+                        int size = s.size();
+                        max_length = max(max_length, size);
+                        used[s] = true;
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+        }
+        return max_length;
+        
 
     }
 };

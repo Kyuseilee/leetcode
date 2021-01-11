@@ -8,11 +8,18 @@
 class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
-        sort(nums.begin(), nums.end());
-        int start = 0;
-        while(start + 1 < nums.size()){
-            if(nums[start+1] - nums[start] <= t)
-                return true;
+        if(nums.size() < 2)
+            return false;
+        int pos = 0;
+        while(pos < nums.size()){
+            long long tmpi = nums[pos];
+            int j = pos+1;
+            for(j = pos+1; j-pos <= k and j < nums.size(); j++){
+                long long tmpj = nums[j];
+                if(abs(tmpi - tmpj) <= t)
+                    return true;
+            }
+            pos = j-k;
         }
         return false;
 

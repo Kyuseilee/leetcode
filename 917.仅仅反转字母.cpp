@@ -8,26 +8,21 @@
 class Solution {
 public:
     string reverseOnlyLetters(string S) {
-        string res = "";
-        stack<int> stk;
-        int pointer = S.size()-1;
-        for(auto ch : S){
-            if(isalnum(ch))
-                stk.push(ch);
-            else{
-                
-                res += S[pointer];
-                pointer--;
-                res += ch;
-            }
+        int left = 0;
+        int right = S.size()-1;
+        while(left < right){
+            while(left < right and !isalpha(S[left]))
+                left++;
+            while(left < right and !isalpha(S[right]))
+                right--;
+            if(left >= right)
+                break;
+            swap(S[left], S[right]);
+            left++;
+            right--;
         }
-        while(!stk.empty()){
-            res += stk.top();
-            stk.pop();
-        }
-        return res;
+        return S;
     }
-
 };
 // @lc code=end
 

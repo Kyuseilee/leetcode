@@ -8,31 +8,35 @@
 class Solution {
 public:
     bool hasGroupsSizeX(vector<int>& deck) {
-        sort(deck.begin(), deck.end());
-        int start = 1;
-        int count = 1;
-        if(deck[start] == deck[0])
-        {
-            while(deck[start] == deck[0]){
-                start++;
-                count++;
+        unordered_map<int,int>com;
+
+        int min_count = INT_MAX;
+        for(auto num : deck){
+            com[num] += 1;
+        }
+
+        for(auto item : com){
+            if(item.second  < 2)
+                return false;
+            min_count = min(min_count, item.second);
+        }
+        for(auto item :com){
+            if(item.second != min_count){
+                int tmp = item.second;
+                while(tmp % min_count != 0){
+                    int min_divide = tmp % min_count;
+                    tmp = min_count;
+                    min_count = min_divide;
+                }
+                break;
             }
         }
-        if(count == 1)
+        if(min_count == 1)
             return false;
-        int cur = 1;
-        int com = start;
-        start++;
-        while(start < deck.size()){
-            while(deck[start] == deck[com]){
-                start++;
-                cur++;
-            }
-            if(cur != count)
+        for(auto item: com){
+            if(item.second % min_count != 0){
                 return false;
-            cur = 1;
-            com = start;
-            start++;
+            }
         }
         return true;
     }

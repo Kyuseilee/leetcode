@@ -8,14 +8,32 @@
 class Solution {
 public:
     vector<string> findRelativeRanks(vector<int>& nums) {
-        vector<string> res;
-        res.push_back("Gold Medal");
-        res.push_back("Silver Medal");
-        res.push_back("Bronze Medal");
-        for(int i = 3; i < nums.size() ;i++)
-            res.push_back(to_string(i+1));
-        return res;
+        vector<int> com = nums;
+        sort(com.rbegin(), com.rend());
 
+        unordered_map<int, int> tmp;
+        for(int i = 0; i < nums.size(); i++){
+            tmp[nums[i]] = i;
+        }
+
+        vector<string> res(nums.size(), "");
+        int count = 1;
+        for(auto num : com){
+            if(count == 1){
+                res[tmp[num]] = "Gold Medal";
+            }
+            else if(count == 2){
+                res[tmp[num]] = "Silver Medal";
+            }
+            else if(count == 3){
+                res[tmp[num]] = "Bronze Medal";
+            }
+            else{
+                res[tmp[num]] = to_string(count);
+            }
+            count++;
+        }
+        return res;
     }
 };
 // @lc code=end

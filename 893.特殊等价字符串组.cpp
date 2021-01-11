@@ -8,23 +8,42 @@
 class Solution {
 public:
     int numSpecialEquivGroups(vector<string>& A) {
-        int start = 0;
-        int count = 0;
-        int max_count = 0;
-        while(start < A.size()){
-            string cur = A[start] + A[start];
-            int fast = start +1;
-            count = 0;
-
-            while(fast < A.size() and cur.find(A[fast]) != cur.npos){
-                cout << A[fast] << " ";
-                count++;
-                fast++;
+        unordered_map<string, int> com;
+        string s = "";
+        string tmp = "";
+        for(auto str:A){
+            s = "";
+            tmp = "";
+            if(com[str])
+            {
+                com[str] += 1;
             }
-            max_count += count;
-            start = fast;
+            else{
+                for(int i = 0; i < str.size(); i += 2){
+                    tmp += str[i];
+                }
+                sort(tmp.begin(), tmp.end());
+                s += tmp;
+                tmp = "";
+                for(int i = 1; i < str.size(); i+= 2){
+                    tmp += str[i];
+                }
+                sort(tmp.begin(), tmp.end());
+                s += tmp;
+
+                com[s] += 1;
+            }
         }
-        return max_count;
+        int count = 0;
+        for(auto item : com){
+            if(count < item.second){
+                count = item.second;
+            }
+            else if(count == item.second){
+                count += item.second;
+            }
+        }
+        return count;
 
     }
 };
