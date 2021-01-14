@@ -8,25 +8,19 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices, int fee) {
-        int total = 0;
-        bool flag = false;
-        int cur = 0;
-        cur = prices[0];
+        int result = 0;
+        int minPrice = prices[0];
         for(int i = 1; i < prices.size(); i++){
-            if(prices[i] - cur >= fee){
-                if(i + 1 < prices.size() and prices[i] - cur - fee >= prices[i+1])
-                {
-                    total += prices[i] - cur -fee;
-                    cur = prices[i+1];
-                }
-                else{
-                    if(i+1 == prices.size())
-                        total += prices[i] - cur - fee;
-                }
-                cur = prices[i+1];
+            if(prices[i] < minPrice)
+                minPrice = prices[i];
+            // if(prices[i] >= minPrice and prices[i] <= minPrice + fee)
+            //     continue    ;
+            if(prices[i] > minPrice + fee){
+                result += prices[i] - minPrice - fee;
+                minPrice = prices[i] - fee;
             }
         }
-        return total;
+        return result;
     }
 };
 // @lc code=end
