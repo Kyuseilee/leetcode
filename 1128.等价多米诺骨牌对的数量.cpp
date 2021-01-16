@@ -8,14 +8,18 @@
 class Solution {
 public:
     int numEquivDominoPairs(vector<vector<int>>& dominoes) {
-        sort(dominoes.begin(), dominoes.end());
-        vector<int> com = dominoes[0];
+        vector<int> com;
         int count = 0;
+        unordered_map<vector<int>, int> mp;
         for(int i = 0; i < dominoes.size(); i++){
-            if(dominoes[i] == com)
-                count++;
-            else{
-                com = dominoes[i];
+            sort(dominoes[i].begin(), dominoes[i].end());
+            mp[dominoes[i]] += 1;
+        }
+        for(int i = 0; i < dominoes.size(); i++){
+            for(int j = 0; j < dominoes.size(); j++){
+                if(mp[j]){
+                    count++;
+                }
             }
         }
         return count;

@@ -8,25 +8,17 @@
 class Solution {
 public:
     char slowestKey(vector<int>& releaseTimes, string keysPressed) {
-        unordered_map<char, int> res;
-        int start = 0;
-        for(int i = 0; i< releaseTimes.size(); i++){
-            res[keysPressed[i]] += releaseTimes[i]-start;
-            start = releaseTimes[i];
-        }
-        int max_val = 0;
-        char index;
-        for(auto num:res){
-            if(max_val < num.second){
-                index = num.first;
-                max_val = num.second;
-            }
-            else if(max_val == num.second){
-                if(index - 'a' < num.first - 'a')
-                    index = num.first;
+         int Maxi=0;//最长持续键的下标
+        int Max= releaseTimes[0];//最长持续时间
+        for(int i=1;i<releaseTimes.size();++i)
+        {
+            if(releaseTimes[i]-releaseTimes[i-1]>Max||(releaseTimes[i]-releaseTimes[i-1]==Max&&keysPressed[i]>keysPressed[Maxi]))//两种情况需要更新max
+            {
+                Maxi=i;//更新最长键的下标
+                Max=releaseTimes[i] - releaseTimes[i - 1];//更新最长键时间
             }
         }
-        return index;
+        return keysPressed[Maxi];
     }
 };
 // @lc code=end

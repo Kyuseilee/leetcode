@@ -8,11 +8,14 @@
 class Solution {
 public:
     vector<int> frequencySort(vector<int>& nums) {
-        unordered_map<int, int>com;
-        for(auto num : nums){
-            com[num] += 1;
+        unordered_map<int, int> cnt;
+        for (auto n : nums) {
+            cnt[n]++;
         }
-        vector<int> res;
+        sort(nums.begin(), nums.end(), [&cnt](int a, int b) {
+            return (cnt[a] == cnt[b]) ? a > b : cnt[a] < cnt[b];
+        });
+        return nums;
     }
 };
 // @lc code=end
