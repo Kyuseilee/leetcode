@@ -8,31 +8,38 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        string cur = "";
+        if(s.size() < 2)
+            return s;
         string result = "";
-        int pos = 0;
-        cur += s[0];
-        for(int i = 1; i < s.size(); i++){
-            cur += s[i];
-            string tmp = cur;
-            reverse(tmp.begin(), tmp.end());
-            if(tmp != cur){
-                int size = cur.size();
-                while(pos < i){
-                    tmp.erase(tmp.end()-1);
-                    string ttmp = tmp;
-                    reverse(ttmp.begin(), ttmp.end());
-                    pos++;
-                    if(ttmp == tmp){
-                        cur = tmp;
-                        break;
-                    }
+        for(int i = 0; i < s.size(); i++)
+        {
+            int left = i, right = i;
+            while(left > 0 and s[left-1] == s[i])
+                left--;
+            while(right < s.size()-1 and s[right+1] == s[i])
+                right++;
+            cout << left << " " << right << "\n";
+            bool flag =false;
+            while(left >=0 and right < s.size())
+            {
+                if(s[left] != s[right])
+                {
+                    flag = true;
+                    break;
                 }
+                if(left == 0 or right == s.size()-1)
+                    break;
+                left--;
+                right++;
             }
-            else{
-                if(cur.size() > result.size())
-                    result = cur;
+            if(flag)
+            {
+                left += 1;
+                right -= 1;
             }
+            string tmp = s.substr(left, right-left+1);
+            if(tmp.size() > result.size())
+                result = tmp;
         }
         return result;
     }

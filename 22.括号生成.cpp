@@ -11,24 +11,30 @@ public:
     string s;
     vector<string> generateParenthesis(int n) {
         res.clear();
-        s = "(";
-        backtracking(s,1, 1, 2*n);
+        s += "(";
+        helper(n, 1, 0);
         return res;
     }
-    void backtracking(string s, int left,int right, int goal){
-        if(s.size() == goal){
+    void helper(int n, int countleft, int countright)
+    {
+        if(s.size() == 2*n)
+        {
             res.push_back(s);
             return ;
         }
-        if(count(s.begin(), s.end(), '(') < goal / 2){
+        if(countleft < n)
+        {
             s += "(";
-            right++;
-            backtracking(s,left, right,goal);
+            helper(n, countleft +1, countright);
+            s.pop_back();
         }
-        if(right){
+        if(countright < n)
+        {
+            if(countright+1 > countleft)
+                return ;
             s += ")";
-            right--;
-            backtracking(s,left,right,goal);
+            helper(n, countleft, countright+1);
+            s.pop_back();
         }
     }
 };

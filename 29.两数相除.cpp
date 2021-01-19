@@ -8,31 +8,24 @@
 class Solution {
 public:
     int divide(int dividend, int divisor) {
-        if(dividend == 0)
-            return 0;
-        if(divisor == 1)
-            return dividend;
-        else if(divisor == -1)
-        {
-            if(dividend > INT_MIN)
-                return -dividend;
-            return INT_MAX;
-        }
-        bool flag = false;
-        int com = dividend * divisor;
-        if(com < 0){
-            flag = true;
-        }
+        if(divisor == 0)
+            return -1;
+        bool minus = false;
+        if(abs(dividend) != dividend and abs(divisor) != divisor)
+            minus = false;
+        else if(abs(dividend) != dividend or abs(divisor) != divisor)
+            minus = true;
         dividend = abs(dividend);
         divisor = abs(divisor);
+        int base = 1;
         int count = 0;
-        while(dividend >= divisor)
+        while(dividend - divisor >= 0)
         {
             dividend -= divisor;
-            count += 1;
+            count += base;
+            divisor += divisor;
+            base += 1;
         }
-        return flag ? count * -1: count;
-
     }
 };
 // @lc code=end

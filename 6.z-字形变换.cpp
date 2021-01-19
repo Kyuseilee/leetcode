@@ -8,15 +8,22 @@
 class Solution {
 public:
     string convert(string s, int numRows) {
-        unordered_map<int, int> com;
+        if(numRows == 1)
+            return s;
+        vector<string>rows(min(int(s.size()), numRows));
         string res = "";
-        for(int i = 0; i < s.size(); i++){
-            if(com[i])
-                continue;
-            res += s[i];
-            res += s[2*]
-            
+        int curRows = 0;
+        bool goingDown = false;
+        for(auto ch : s)
+        {
+            rows[curRows] += ch;
+            if(curRows == 0 or curRows == numRows-1)
+                goingDown = !goingDown;
+            curRows += goingDown? 1 : -1;
         }
+        for(auto row : rows)
+            res += row;
+        return res;
     }
 };
 // @lc code=end
