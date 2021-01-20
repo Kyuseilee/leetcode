@@ -8,20 +8,21 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-        int sum = 1;
-        int n = nums.size();
-        vector<int>res(n, 1);
-        res[0] = 1;
-        for(int i = 1; i < nums.size(); i++){
-            res[i] = nums[i-1]*res[i-1];
+        int left = nums[0];
+        vector<int>result = nums;
+        result[0] = 1;
+        for(int i = 1 ; i < nums.size(); i++)
+        {
+            result[i] = left;
+            left *= nums[i];
         }
-        int R = 1;
-        for(int i = n-1; i >= 0; i--){
-            res[i] = res[i] * R;
-            R *= nums[i];
+        int right = nums[nums.size()-1];
+        for(int i = nums.size()-2; i >=0; i--)
+        {
+            result[i] *= right;
+            right *= nums[i];
         }
-        return res;
-
+        return result;
     }
 };
 // @lc code=end

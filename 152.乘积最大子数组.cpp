@@ -8,8 +8,7 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        vector<int> tmp;
-        
+        return max_val;
     }
 };
 // @lc code=end

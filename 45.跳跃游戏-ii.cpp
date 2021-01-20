@@ -8,24 +8,24 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
+        int start = 0;
+        int maxPos = 0;
         int n = nums.size();
-        int rightmost = 0;
-        int pace = 0;
-        int min_pace = 0;
-        for(int i = 0; i < nums.size()-1; i++){
-            if(i <= rightmost){
-                rightmost = max(rightmost, i + nums[i]);
-                if(rightmost >= n-1)
-                    return pace;
-                else{
-                    int tmp = rightmost;
-                    min_pace = pace;
-                    while()
+        int end = 0;
+        int step = 0;
+        for(int i = 0; i < n-1; i++)
+        {
+            if(maxPos >= i)
+            {
+                maxPos = max(maxPos, i+nums[i]);
+                if(i == end)
+                {
+                    end = maxPos;
+                    step++;
                 }
-                pace += 1;
             }
         }
-        return false;
+        return step;
     }
 };
 // @lc code=end
