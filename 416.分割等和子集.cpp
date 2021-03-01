@@ -13,20 +13,18 @@ public:
         {
             sum += num;
         }
-        if(sum %2 == 1)
+        if(sum % 2 == 1)
             return false;
+        vector<int>dp(20001, 0);
+        dp[0] = 0;
         sum /= 2;
-        vector<int>dp(10001, 0);
         for(int i = 0; i < nums.size(); i++)
         {
             for(int j = sum; j >= nums[i]; j--)
-            {
-                if(dp[sum] == sum)
-                    return true;
                 dp[j] = max(dp[j], dp[j-nums[i]] + nums[i]);
-            }
         }
         return dp[sum] == sum;
+
     }
 };
 // @lc code=end
