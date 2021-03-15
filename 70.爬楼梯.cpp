@@ -8,20 +8,17 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        if(n == 1)
-            return 1;
-        else if(n == 2)
-            return 2;
-        int first = 1;
-        int second = 2;
-        int cur = 3;
-        while(cur <= n){
-            int tmp = second;
-            second = first + second;
-            first = tmp;
-            cur++;
+        vector<int>dp(n+1, 0);
+        dp[0] = 1;
+        for(int i = 1; i <= n; i++)
+        {
+            for(int j = 1; j <= 2; j++)
+            {
+                if(i >= j)
+                    dp[i] += dp[i-j];
+            }
         }
-        return second;
+        return dp[n];
         
     }
 };
