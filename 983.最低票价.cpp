@@ -23,9 +23,6 @@ public:
                 dp[i] = dp[i-1];
             }
         }
-        for(auto num : dp){
-            cout << num << " ";
-        }
         return dp[days[n-1]];
 
     }
